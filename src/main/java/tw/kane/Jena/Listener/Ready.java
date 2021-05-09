@@ -5,14 +5,15 @@ import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.hooks.EventListener;
 import org.jetbrains.annotations.NotNull;
 import tw.kane.Jena.Bot;
+import tw.kane.Jena.Command.Ping;
 import tw.kane.Jena.Logger;
 
 public class Ready implements EventListener {
     public Logger logger = new Logger("Ready");
 
     @Override
-    public void onEvent(@NotNull GenericEvent genericEvent) {
-        if(!(genericEvent instanceof ReadyEvent))
+    public void onEvent(@NotNull GenericEvent event) {
+        if(!(event instanceof ReadyEvent))
             return;
         logger.i("Bot online!");
         logger.i("=== Bot info ===");
@@ -22,5 +23,8 @@ public class Ready implements EventListener {
                 Bot.client.getSelfUser().getId()
         ));
         logger.i("================");
+        logger.i("Registering Commands...");
+
+        Bot.registerCommand(new Ping());
     }
 }

@@ -28,6 +28,6 @@ public class Bot {
 
     public static void registerCommand(Command command) {
         Commands.add(command);
-        logger.i(command.name + " registered!");
+        logger.i(command.name + " command registered!");
     }
 }

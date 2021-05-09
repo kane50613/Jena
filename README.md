@@ -1,3 +1,3 @@
 #Jena
 
-The Java version of Xena
+Xena in Java

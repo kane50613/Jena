@@ -7,8 +7,10 @@ import tw.kane.Jena.Command.Ping;
 import tw.kane.Jena.Listener.Message;
 import tw.kane.Jena.Listener.Ready;
 
+import javax.annotation.Nullable;
 import javax.security.auth.login.LoginException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Bot {
 
@@ -20,8 +22,8 @@ public class Bot {
 
     public static void init(String token, String prefix) throws LoginException, InterruptedException {
         Bot.client = JDABuilder.createDefault(token)
-                .addEventListeners(new Ready(), new Message())
-                .build();
+            .addEventListeners(new Ready(), new Message())
+            .build();
         Bot.prefix = prefix;
         Bot.Commands = new ArrayList<>();
     }
@@ -29,5 +31,21 @@ public class Bot {
     public static void registerCommand(Command command) {
         Commands.add(command);
         logger.i(command.name + " command registered!");
+    }
+
+    @Nullable
+    public static Command findCommand(String name) {
+        return Bot.Commands.stream().filter(x ->
+            x.name.equalsIgnoreCase(name) || Arrays.stream(x.alias).anyMatch(a ->
+                    a.equalsIgnoreCase(name)
+            )
+        ).findFirst().get();
+    }
+
+    public static void shutdown() {
+        if(Bot.client != null) {
+            Bot.client.shutdown();
+            Bot.client.shutdownNow();
+        }
     }
 }

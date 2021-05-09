@@ -4,6 +4,7 @@ import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 import tw.kane.Jena.Bot;
+import tw.kane.Jena.Command.Help;
 import tw.kane.Jena.Command.Ping;
 import tw.kane.Jena.Logger;
 
@@ -23,5 +24,6 @@ public class Ready extends ListenerAdapter {
         logger.i("Registering Commands...");
 
         Bot.registerCommand(new Ping());
+        Bot.registerCommand(new Help());
     }
 }

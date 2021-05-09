@@ -23,5 +23,11 @@ public class Main {
         } catch (LoginException | InterruptedException e) {
             logger.e(e);
         }
+
+        //Shutdown hook
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            logger.i("Shutting Down...");
+            Bot.shutdown();
+        }));
     }
 }

@@ -22,14 +22,11 @@ public class Message extends ListenerAdapter {
         if(message.getContentRaw().trim().startsWith(Bot.prefix)) {
             List<String> args = new LinkedList<>(Arrays.asList(message.getContentRaw().trim().split(" ")));
             args.remove(0);
-            if(Bot.Commands.stream().anyMatch(x ->
-                    x.name.equalsIgnoreCase(message.getContentRaw().split(Bot.prefix)[1].split(" ")[0]) || Arrays.stream(x.alias).anyMatch(a ->
-                            a.equalsIgnoreCase(message.getContentRaw().split(Bot.prefix)[1].split(" ")[0])))) {
-                Bot.Commands.stream().filter(x -> x.name.equalsIgnoreCase(message.getContentRaw().split(Bot.prefix)[1].split(" ")[0]) || Arrays.stream(x.alias).anyMatch(a -> a.equalsIgnoreCase(message.getContentRaw().split(Bot.prefix)[1].split(" ")[0])))
-                        .findFirst().get().execute(
-                                message,
-                                args
-                        );
+            if(Bot.findCommand(message.getContentRaw().split(Bot.prefix)[1].split(" ")[0]) != null) {
+                Bot.findCommand(message.getContentRaw().split(Bot.prefix)[1].split(" ")[0]).execute(
+                    message,
+                    args.toArray(new String[]{})
+                );
             }
         }
     }

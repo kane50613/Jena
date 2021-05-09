@@ -12,6 +12,8 @@ import java.util.List;
 public class Message extends ListenerAdapter {
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
+        if(event.getAuthor().isBot()) //prevent bot trigger by itself
+            return;
         if(event.getChannelType() == ChannelType.PRIVATE) {
             event.getMessage().getChannel().sendMessage("Go to a guild channel!").queue();
             return;

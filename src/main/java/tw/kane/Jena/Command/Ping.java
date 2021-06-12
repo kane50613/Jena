@@ -4,10 +4,6 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
 import tw.kane.Jena.Util;
 
-import java.awt.*;
-import java.sql.Timestamp;
-import java.util.List;
-
 public class Ping extends Command {
     public Ping() {
         super(

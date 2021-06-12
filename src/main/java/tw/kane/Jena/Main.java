@@ -1,10 +1,13 @@
 package tw.kane.Jena;
 
+import tw.kane.osu4j.OsuClient;
+
 import javax.security.auth.login.LoginException;
 
 public class Main {
 
     public static Logger logger = new Logger("Main");
+    public static OsuClient osuClient;
 
     public static void main(String[] args) {
         String token = System.getenv().get("TOKEN");
@@ -12,6 +15,28 @@ public class Main {
             logger.e("No Token Provided!");
             return;
         }
+
+        String mongoUrl = System.getenv("MONGO_URL");
+        if(mongoUrl == null) {
+            logger.e("No database url provided");
+            return;
+        }
+
+        String osuToken = System.getenv("OSU_TOKEN");
+        if(osuToken == null) {
+            logger.e("No osu token provided");
+            return;
+        }
+        String osuId = System.getenv("OSU_ID");
+        if(osuId == null) {
+            logger.e("No osu id provided");
+            return;
+        }
+        osuClient = new OsuClient(osuId, osuToken);
+
+        logger.i("Connecting to database...");
+        Database.init(mongoUrl);
+        logger.i("Database connected...");
 
         try {
             logger.i("Starting Bot...");
@@ -26,7 +51,7 @@ public class Main {
 
         //Shutdown hook
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            logger.i("Shutting Down...");
+            logger.w("Shutting Down...");
             Bot.shutdown();
         }));
     }

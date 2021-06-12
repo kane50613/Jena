@@ -2,12 +2,11 @@ package tw.kane.Jena.Command;
 
 import net.dv8tion.jda.api.entities.Message;
 
-import java.util.List;
-
 public abstract class Command {
 
     enum CommandType {
-        GENERAL("General");
+        GENERAL("General"),
+        OSU("osu!");
 
         CommandType(String name) {
             this.name = name;

@@ -5,7 +5,9 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 import tw.kane.Jena.Bot;
 import tw.kane.Jena.Command.Help;
+import tw.kane.Jena.Command.Osu;
 import tw.kane.Jena.Command.Ping;
+import tw.kane.Jena.Command.Recent;
 import tw.kane.Jena.Logger;
 
 public class Ready extends ListenerAdapter {
@@ -25,5 +27,7 @@ public class Ready extends ListenerAdapter {
 
         Bot.registerCommand(new Ping());
         Bot.registerCommand(new Help());
+        Bot.registerCommand(new Osu());
+        Bot.registerCommand(new Recent());
     }
 }

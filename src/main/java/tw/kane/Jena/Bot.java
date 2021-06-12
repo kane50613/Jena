@@ -3,11 +3,9 @@ package tw.kane.Jena;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import tw.kane.Jena.Command.Command;
-import tw.kane.Jena.Command.Ping;
 import tw.kane.Jena.Listener.Message;
 import tw.kane.Jena.Listener.Ready;
 
-import javax.annotation.Nullable;
 import javax.security.auth.login.LoginException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,13 +31,12 @@ public class Bot {
         logger.i(command.name + " command registered!");
     }
 
-    @Nullable
     public static Command findCommand(String name) {
         return Bot.Commands.stream().filter(x ->
-            x.name.equalsIgnoreCase(name) || Arrays.stream(x.alias).anyMatch(a ->
-                    a.equalsIgnoreCase(name)
-            )
-        ).findFirst().get();
+                x.name.equalsIgnoreCase(name) || Arrays.stream(x.alias).anyMatch(a ->
+                        a.equalsIgnoreCase(name)
+                )
+        ).findFirst().orElse(null);
     }
 
     public static void shutdown() {

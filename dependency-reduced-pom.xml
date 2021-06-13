@@ -44,6 +44,10 @@
       <name>m2-dv8tion</name>
       <url>https://m2.dv8tion.net/releases</url>
     </repository>
+    <repository>
+      <id>jitpack.io</id>
+      <url>https://jitpack.io</url>
+    </repository>
   </repositories>
   <properties>
     <maven.compiler.source>1.8</maven.compiler.source>

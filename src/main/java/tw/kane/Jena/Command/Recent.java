@@ -33,40 +33,53 @@ public class Recent extends Command{
             try {
                 User user = Main.osuClient.getUser(String.join(" ", args), Mode.OSU, true);
                 Score[] score = Main.osuClient.getUserScores(
-                        user.id,
-                        ScoreType.RECENT,
-                        true,
-                        Mode.OSU
+                    user.id,
+                    ScoreType.RECENT,
+                    true,
+                    Mode.OSU
                 );
                 message.reply(
-                        new EmbedBuilder()
-                                .setAuthor(score[0].user.name, "https://osu.ppy.sh/users/" + score[0].user.id)
-                                .setDescription(String.format(
-                                        "∙ %s",
-                                        score[0].rank.getName()
-                                ))
-                                .build()
-                ).content("Recent Play").queue();
+                    new EmbedBuilder()
+                        .setAuthor(String.format(
+                            "%s [%s] +%s [%s★]",
+                            score[0].beatmapSet.title,
+                            score[0].beatmap.version,
+                            Arrays.toString(score[0].mods),
+                            score[0].beatmap.difficultyRating
+                        ))
+                        .setDescription(String.format(
+                            "∙ %s ∙ **%fPP** ∙ %f%\n∙ %,d",
+                            score[0].rank.getName(),
+                            score[0].pp,
+                            score[0].accuracy,
+                            score[0].score
+                        ))
+                        .build()
+                ).content(String.format(
+                    "**%s 24小時內osu!%s的遊玩紀錄**",
+                    score[0].user.name,
+                    score[0].mode.getName())
+                ).queue();
             } catch (IOException e) {
                 message.reply(
-                        new EmbedBuilder()
-                                .setTitle("Unexpected Error")
-                                .setColor(Color.RED)
-                                .build()
+                    new EmbedBuilder()
+                        .setTitle("Unexpected Error")
+                        .setColor(Color.RED)
+                        .build()
                 ).queue();
             } catch (InvalidTokenException e) {
                 message.reply(
-                        new EmbedBuilder()
-                                .setTitle("Wrong osu! token provided")
-                                .setColor(Color.RED)
-                                .build()
+                    new EmbedBuilder()
+                        .setTitle("Wrong osu! token provided")
+                        .setColor(Color.RED)
+                        .build()
                 ).queue();
             } catch (NotFoundException e) {
                 message.reply(
-                        new EmbedBuilder()
-                                .setTitle("Player Not Found or no recent play")
-                                .setColor(Color.RED)
-                                .build()
+                    new EmbedBuilder()
+                        .setTitle("Player Not Found or no recent play")
+                        .setColor(Color.RED)
+                        .build()
                 ).queue();
             }
         }

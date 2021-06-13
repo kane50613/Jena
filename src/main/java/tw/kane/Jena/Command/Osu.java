@@ -35,21 +35,22 @@ public class Osu extends Command{
                     true
                 );
                 message.reply(
-                        new EmbedBuilder()
-                                .setAuthor(
-                                        user.name,
-                                        "https://osu.ppy.sh/users/" + user.id,
-                                        "https://a.ppy.sh/" + user.id
-                                )
-                                .setColor(Util.randomColor())
-                                .build()
+                    new EmbedBuilder()
+                        .setAuthor(
+                            user.name,
+                            "https://osu.ppy.sh/users/" + user.id,
+                            "https://a.ppy.sh/" + user.id
+                        )
+                        .setDescription("加入時間: " + user.joinAt.toString())
+                        .setColor(Util.randomColor())
+                        .build()
                 ).queue();
             } catch (IOException e) {
                 message.reply(
-                        new EmbedBuilder()
-                                .setTitle("Unexpected Error")
-                                .setColor(Color.RED)
-                                .build()
+                    new EmbedBuilder()
+                        .setTitle("Unexpected Error")
+                        .setColor(Color.RED)
+                        .build()
                 ).queue();
             } catch (InvalidTokenException e) {
                 message.reply(

@@ -12,6 +12,7 @@ import tw.kane.osu4j.ScoreType;
 
 import java.awt.*;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.Arrays;
 
 public class Recent extends Command{
@@ -44,16 +45,18 @@ public class Recent extends Command{
                             "%s [%s] +%s [%s★]",
                             score[0].beatmapSet.title,
                             score[0].beatmap.version,
-                            Arrays.toString(score[0].mods),
+                            String.join("", score[0].mods),
                             score[0].beatmap.difficultyRating
-                        ))
+                        ), "https://osu.ppy.sh/users/" + score[0].user.id, score[0].user.avatarUrl)
                         .setDescription(String.format(
-                            "∙ %s ∙ **%fPP** ∙ %f%\n∙ %,d",
+                            "∙ %s ∙ **%sPP** ∙ %s%%%n∙ x%,d ∙ %,d",
                             score[0].rank.getName(),
-                            score[0].pp,
-                            score[0].accuracy,
+                            new DecimalFormat("###.#").format(score[0].pp),
+                            new DecimalFormat("###.#").format(score[0].accuracy*100),
+                            score[0].counts.maxCombo,
                             score[0].score
                         ))
+                        .setThumbnail(score[0].beatmapSet.cover)
                         .build()
                 ).content(String.format(
                     "**%s 24小時內osu!%s的遊玩紀錄**",

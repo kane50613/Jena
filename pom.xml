@@ -65,6 +65,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.github.Gary50613</groupId>
+            <artifactId>osu4j</artifactId>
+            <version>v2.3.2</version>
+        </dependency>
+        <dependency>
             <groupId>net.dv8tion</groupId>
             <artifactId>JDA</artifactId>
             <version>4.2.1_262</version>
@@ -84,11 +89,6 @@
             <groupId>org.mongodb</groupId>
             <artifactId>mongodb-driver-sync</artifactId>
             <version>4.2.3</version>
-        </dependency>
-        <dependency>
-            <groupId>tw.kane</groupId>
-            <artifactId>osu4j</artifactId>
-            <version>v2.3.2</version>
         </dependency>
     </dependencies>
 </project>

@@ -16,11 +16,11 @@ public class Main {
             return;
         }
 
-//        String mongoUrl = System.getenv("MONGO_URL");
-//        if(mongoUrl == null) {
-//            logger.e("No database url provided");
-//            return;
-//        }
+        String mongoUrl = System.getenv("MONGO_URL");
+        if(mongoUrl == null) {
+            logger.e("No database url provided");
+            return;
+        }
 
         String osuToken = System.getenv("OSU_TOKEN");
         if(osuToken == null) {
@@ -35,7 +35,7 @@ public class Main {
         osuClient = new OsuClient(osuId, osuToken);
 
         logger.i("Connecting to database...");
-//        Database.init(mongoUrl);
+        Database.init(mongoUrl);
         logger.i("Database connected...");
 
         try {

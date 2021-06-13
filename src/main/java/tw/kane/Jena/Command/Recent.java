@@ -4,6 +4,7 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
 import tw.kane.Jena.Main;
 import tw.kane.osu4j.Base.Score;
+import tw.kane.osu4j.Base.User;
 import tw.kane.osu4j.Exception.InvalidTokenException;
 import tw.kane.osu4j.Exception.NotFoundException;
 import tw.kane.osu4j.Mode;
@@ -30,8 +31,9 @@ public class Recent extends Command{
             //TODO Database
         } else {
             try {
+                User user = Main.osuClient.getUser(String.join(" ", args), Mode.OSU, true);
                 Score[] score = Main.osuClient.getUserScores(
-                        String.join(" ", args),
+                        user.id,
                         ScoreType.RECENT,
                         true,
                         Mode.OSU

@@ -84,7 +84,7 @@
         <dependency>
             <groupId>tw.kane</groupId>
             <artifactId>osu4j</artifactId>
-            <version>v2.3</version>
+            <version>v2.3.2</version>
         </dependency>
     </dependencies>
 </project>
